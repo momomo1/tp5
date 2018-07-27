@@ -87,4 +87,60 @@ class TextController extends Controller{
 
 		dump( $catModel->update($data) );
 	}
+
+	//删除
+	public function index7(){
+		//实例化模型
+		// $catModel = new Category()::get(1);
+		// dump( $category->delete() );
+
+		dump( Category::destroy('11,12') );
+	}
+
+	//查询
+	public function index8(){
+		$catModel = new Category();
+
+		// dump($category = Category::get(5));
+		// $category = $catModel->find();
+		// dump(Category::all("1,2,3"));
+
+		// $data = Category::select();
+		// dump($data);
+
+		//表达式查询条件
+		// $data = $catModel->field("cat_id")
+		// 				 ->order("cat_id desc")
+		// 				 ->where("cat_id",">","1")
+		// 				 ->select();
+
+		// dump($data);
+	}
+
+	public function index9(){
+		$catModel = new Category();
+
+		//取出cat_name字段,根据pid进行分组,求总数
+		// $data = $catModel->field("cat_name,pid,count('cat_id') count")->group('pid')->select()->toArray();
+
+		// $data = $catModel->limit(2,2)->select()->toArray();
+
+		$data = $catModel
+				->field("t1.*,t2.cat_name as p_name")
+				->alias('t1')
+				->join("tp_category t2",'t1.pid = t2.cat_id','left')
+				->select()
+				->toArray();
+
+		dump($data);
+	}
+
+	public function index10(){
+		// $catModel = new Category;
+		// echo '<br>'.$catModel->max('cat_id');
+		// echo '<br>'.$catModel->avg('cat_id');
+		// echo '<br>'.$catModel->sum('cat_id');
+
+		echo md5("123456".config('password_salt'));die;
+	}
 }

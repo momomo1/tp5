@@ -47,7 +47,8 @@
                     </li>
                     <li>
                         <input type="text" name="captcha" style="width: 100px" class="loginpwd" placeholder="验证码" />
-                        <img src="" alt='验证码' id='changeCaptcha' />
+
+                        <img src="{:captcha_src()}" alt='验证码' id='changeCaptcha' />
                     </li>
                     <li>
                         <input name="" type="submit" class="loginbtn" value="登录" />
@@ -59,5 +60,12 @@
     </form>
     <div class="loginbm">版权所有 &copy;2018 <a href="http://www.itcast.cn/php">PHP学院</a> </div>
 </body>
-
+<script type="text/javascript">
+    //点击更换验证码
+    $("#changeCaptcha").on('click',function(){
+        $(this).attr('src',"{:captcha_src()}?_="+Math.random());
+    });
+    //让验证码自执行单击事件(前提是, 已经绑定了单击事件才行)
+    $("#changeCaptcha").click();
+</script>
 </html>
